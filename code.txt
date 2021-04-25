@@ -1,0 +1,78 @@
+def dict(list1):
+    dictionary = {list1[i]: int(list1[i + 1]) for i in range(0, len(list1), 2)}
+    return dictionary
+
+
+#for sorting the list
+
+def sort1(inplist):
+    for i in range(1, len(inplist)):
+        j = i-1
+        next_element = inplist[i]
+
+# Compare the current element with next element
+		
+        while (inplist[j] > next_element) and (j >= 0):
+            inplist[j+1] = inplist[j]
+            j=j-1
+        inplist[j+1] = next_element
+        
+#main function 
+def main(array_val,n,m,l):
+    result = float('inf') #some positive highest number
+    final_output.clear()
+    sort1(array_val)
+    leftindex=None
+    rightindex=None
+
+
+    for i in range(n-m+1):
+        if result > int(min(result, array_val[i+m-1] - array_val[i])):
+            result = int(min(result, array_val[i+m-1] - array_val[i]))
+            leftindex=i
+            rightindex=i+m-1
+    for j in range(m):
+        for name,value in input_items.items():
+            if(int(value)==array_val[j+leftindex]):                
+                val = dict([name,value])
+                final_output.update(val)
+    return result
+
+#opening the input file in read mode
+
+input_file = open("sample_input.txt",'r')
+global input_items, final_output 
+input_items = {}
+final_output = {}
+
+for line in input_file:
+    lines = line.split(":")
+    val = dict(lines)
+    input_items.update(val)
+   
+val = (input_items.values())
+actual = []
+for n in val:
+    actual.append(int(n))
+
+arr= actual 
+n =len(arr) 
+input_file.close()
+while(True):
+
+#output file to append
+    fil = open("output.txt", "a")
+    m = int(input("Number of employees : ")) 
+    fil.write("Number of employees : "+str(m))
+    fil.write("\n")
+    fil.write("Here the input_items that are selected for distribution are:")
+    fil.write("\n")
+    result = main(arr, n, m,m)
+    for name,value in final_output.items():
+        fil.write(name+" : "+str(value))
+        fil.write("\n")
+    print("Output File Written")
+    fil.write("And the difference between the chosen goodie with highest price and the lowest price is "+str(result))
+    fil.write("\n")
+    fil.write("\n")
+    fil.close()
